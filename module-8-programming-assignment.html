@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 8 Programming Assignment</title>
+<style>* { font-family: monospace; }</style>
+<script>
+
+// NOTE: You must implement the data structures using the no prototype approach.
+//       This is what the book uses, so you can copy it.
+//       See also: https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+
+// NOTE: Please review the following links regularly:
+//       https://it.pointpark.edu/tutorials/arrays-vs-objects/
+//       https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+//       https://it.pointpark.edu/tutorials/implementation-vs-interface/
+
+
+
+//----------------//
+// Big O notation //
+//----------------//
+console.log("Big O notation");
+
+// 1. Analyze the complexity of the isPalindrome function below. Make a
+//    distinction between best, worst, and average case complexity.
+Best case: O(1) // not a palindrome(first and last letter not matched).
+Average case: O(n/4)~O(n).
+explanation: between 0 to n/2 length one letter does not match.
+so we can say that,
+(0+(n/2))/2~ n/4
+O(n/4) ~ O(n)
+Worst case:O(n/2)~O(n) //word is palindrome or last letter does not match.
+
+function isPalindrome(str) {
+  for (var i = 0; i < str.length/2; i++) {
+    if (str[i] !== str[str.length-i-1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// 2. Write a program that finds the minimum element in a stack in O(1) time
+//    complexity. Note that earlier solutions searched through the elements on
+//    the stack but that leads to an O(n) solution.
+
+let stack1 =[] //main stack
+let stack2 =[] //extra stack
+//check if a stack is empty
+function isEmpty(stack)
+{
+  if(stack.length===0)
+    return true;
+  return false;
+}
+function getTop(stack)
+{
+  return stack[stack.length-1];
+}
+//get minimum element from the stack
+function getMin()
+{
+  return stack2[stack2.length-1]
+}
+
+//push an element to the stack
+function push(x)
+{
+  //if stack is empty push element x in both stacks
+  if(isEmpty(stack1)&&isEmpty(stack2))
+  {
+    stack1.push(x)
+    stack2.push(x)
+    return;
+  }
+//get top element of stack 2 and compare
+  var secondTop = getTop(stack2)
+  if(x<secondTop)
+    stack2.push(x);
+  else
+    stack2.push(secondTop);
+
+   //push element x in stack 1
+   stack1.push(x);
+}
+//pop operation in a stack
+function pop()
+{
+  //pop element from second stack
+  stack2.pop();
+  //pop element from 1st stack and return
+  return stack1.pop();
+
+}
+push(11);
+push(20);
+push(3);
+push(40);
+push(52);
+console.log("MINIMUM ELEMENT IN STACK IS: ", getMin())
+
+
+//    NOTE: this question is sometimes asked on interviews.
+
+
+
+//----------------------------//
+// Having fun with algorithms //
+//----------------------------//
+console.log("Having fun with algorithms");
+
+// 1. Solve Project Euler problem 1 (https://projecteuler.net/problem=1).
+const limit = 1000;
+const m = 3, n = 5;
+
+const mulM = Math.floor((limit - 1) / m);
+const mulN = Math.floor((limit - 1) / n);
+
+const lcm = leastCommonMultiple(m, n);
+const mulLcm = Math.floor((limit - 1) / lcm);
+
+const result = m * mulM * (mulM + 1) / 2
+  + n * mulN * (mulN + 1) / 2
+  - lcm * mulLcm * (mulLcm + 1) / 2;
+
+
+Read more on Brainly.in - https://brainly.in/question/3414157#readmore
+
+// 2. Solve Project Euler problem 2 (https://projecteuler.net/problem=2).
+const SQ5 = 5 ** .5;
+const PHI = (1 + SQ5) / 2;
+function allEvenFibonacciUpTo(limit) {
+  const highestIndexBelowLimit = Math.floor(Math.log(limit * SQ5) / Math.log(PHI));
+  // I love expressive variable names, but the formula could get too long!
+  const n = Math.floor(highestIndexBelowLimit / 3);
+  return ((PHI ** (3 * n + 3) - 1) / (PHI ** 3 - 1)
+    - ((1 - PHI) ** (3 * n + 3) - 1) / ((1 - PHI) ** 3 - 1)) / SQ5;
+}
+
+console.log(allEvenFibonacciUpTo(4e6)); // 4613731.999999999
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
