@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 8 Programming Project</title>
+<style>* { font-family: monospace; }</style>
+<script>
+
+// NOTE: You must implement the data structures using the prototype approach.
+//       This is not what the book uses, so you have to convert it.
+//       See also: https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+
+// NOTE: Please review the following links regularly:
+//       https://it.pointpark.edu/tutorials/arrays-vs-objects/
+//       https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+//       https://it.pointpark.edu/tutorials/implementation-vs-interface/
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. What is the worst case complexity of the following function?
+
+function hasDuplicates(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length; j++) {
+      if (i !== j && arr[i] === arr[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+//The worst-case complexity of the function is O(n2).
+//where n = arr.length or simply length of the array.
+//Reason:
+//let arr = [1,2,3,4,5]
+//For outer loop i=0 inner loop runs for j=0 to j= arr.length
+//For outer loop i=1 inner loop runs for j=0 to j= arr.length
+//For outer loop i=2 inner loop runs for j=0 to j= arr.length
+//For outer loop i=3 inner loop runs for j=0 to j= arr.length
+//For outer loop i=4 inner loop runs for j=0 to j= arr.length
+//after that it will return false.
+//So for each iteration, the inner loops run arr.length or n times.
+//So for n iterations, it takes n*n = n2 time.
+
+// 2. Implement a faster version of the same function and analyze the
+//    complexity of this approach.
+
+function hasDuplicatesFast(arr) {
+let map = {};
+let cheker = false;
+for(let i = 0; i < arr.length; i++) {
+// check if object contains entry with this element as key
+if(map[arr[i]]) {
+checker = true;
+// terminate the loop
+break;
+}
+// add entry in object with the element as key
+map[arr[i]] = true;
+}
+//Reason
+//Declare an empty object.
+//Traverse the array using a for loop.
+//In every iteration, add a new entry in the object with the array element as key and any fixe value
+//While doing the iteration first check the presence of current array element in object
+//If an entry is already there, means that the array has duplicacy so terminate the loop.
+  // todo
+}
+
+// 3. The travelling salesman problem is a another classic problem and we are
+//    going to solve it using a greedy algorithm. Before starting, please read
+//    through the article on Wikipedia:
+//      https://en.wikipedia.org/wiki/Travelling_salesman_problem
+//    Then implement the following:
+//    (a) Create a graph that represents the example symmetric TSP problem on
+//        the Wikipedia page.
+//    (b) Implement a greedy search that finds the shortest path. You should
+//        have the following steps: (1) pick node A as the starting position,
+//        (2) pick the closest neighbor that has not been visited as the next
+//        city to visit, (3) continue this process until returning to A,
+//        (4) print the final length of the path and also the sequence of
+//        the cities.
+//    (c) Check your results, do they make sense? Is is the optimal solution?
+
+If size of S is 2, then S must be {1, i},
+ C(S, i) = dist(1, i)
+Else if size of S is greater than 2.
+ C(S, i) = min { C(S-{i}, j) + dis(j, i)} where j belongs to S, j != i and j != 1.
+// For a set of size n, we consider n-2 subsets each of size n-1 such that all subsets don’t have nth in them.
+//Using the above recurrence relation, we can write dynamic programming based solution. There are at most O(n*2n)
+//subproblems, and each one takes linear time to solve. The total running time is therefore O(n2*2n). The time
+//complexity is much less than O(n!), but still exponential. Space required is also exponential. So this approach
+//is also infeasible even for slightly higher number of vertices.
+
+// 4. Solve https://csacademy.com/contest/interview-archive/task/intersecting-rectangles/
+//    What is the runtime complexity of your solution?
+//    HINT: Try to break down the problems into smaller steps. For example,
+//          find a convenient way to represent rectangles and define a function
+//          that tests whether one rectangle is inside another. Then test your
+//          code on just two rectangles first to make sure it works.
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
